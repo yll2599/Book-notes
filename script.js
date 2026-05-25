@@ -56,9 +56,15 @@ function flipTo(targetId, isBack = false) {
     frame.style.cursor = 'pointer';
   }
 
-  // Restore saved image
+  // Restore saved image, or fall back to images/cover.png if present
   const saved = localStorage.getItem(key);
-  if (saved) applyImage(saved);
+  if (saved) {
+    applyImage(saved);
+  } else {
+    const fallback = new Image();
+    fallback.onload = () => applyImage('images/cover.png');
+    fallback.src = 'images/cover.png';
+  }
 
   // Placeholder click → open file picker
   placeholder.addEventListener('click', e => {
@@ -72,10 +78,8 @@ function flipTo(targetId, isBack = false) {
     fileInput.click();
   });
 
-  // Frame click → open book (only when image exists)
-  frame.addEventListener('click', () => {
-    if (coverImg.style.display !== 'none') flipTo('s1');
-  });
+  // Frame click → open book always; placeholder click is handled separately
+  frame.addEventListener('click', () => flipTo('s1'));
 
   // File selected
   fileInput.addEventListener('change', e => {
