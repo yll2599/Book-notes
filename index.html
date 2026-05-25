@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reading Notes · Clear Thinking</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="book-wrap" id="bookWrap">
+
+    <!-- ═══ SPREAD 0: COVER ═══ -->
+    <div class="spread active" id="s0">
+      <div class="page left cover-back">
+        <div class="deco-corner top-left">☕</div>
+        <div class="deco-corner bottom-right">✿</div>
+        <div class="vertical-text">Reading Notes · 2025</div>
+        <div class="stamp">
+          <div class="stamp-inner">
+            <span>📚</span>
+            <small>BOOKS & NOTES</small>
+          </div>
+        </div>
+        <p class="cover-back-quote">"We don't rise to the level of our goals,<br>we fall to the level of our systems."</p>
+        <div class="washi washi-h" style="top:60px;left:-10px;width:130px;transform:rotate(-4deg);background:rgba(184,210,150,0.55);"></div>
+      </div>
+
+      <div class="spine"></div>
+
+      <div class="page right cover-front" id="coverFront">
+        <div class="washi washi-h" style="top:18px;left:60px;width:100px;transform:rotate(2deg);background:rgba(220,170,120,0.5);"></div>
+        <div class="cover-img-frame" id="coverFrame">
+          <!-- shown when no image uploaded yet -->
+          <div class="upload-placeholder" id="uploadPlaceholder">
+            <div class="upload-icon">📷</div>
+            <p class="upload-label">upload cover photo</p>
+          </div>
+          <!-- shown once image is uploaded -->
+          <img id="coverImg" src="" alt="Book cover" style="display:none">
+          <div class="change-cover-btn" id="changeCoverBtn" style="display:none">↻ change</div>
+          <div class="cover-hover-hint" id="openHint" style="display:none">click to open ↗</div>
+          <input type="file" id="coverUpload" accept="image/*" style="display:none">
+        </div>
+        <div class="open-hint" id="openHintBelow" style="display:none" onclick="flipTo('s1')">— open book —</div>
+        <div class="washi washi-h" style="bottom:24px;right:30px;width:80px;transform:rotate(-2deg);background:rgba(200,160,220,0.5);"></div>
+      </div>
+    </div>
+
+    <!-- ═══ SPREAD 1: TABLE OF CONTENTS ═══ -->
+    <div class="spread" id="s1">
+      <div class="page left toc-left">
+        <div class="washi washi-h" style="top:30px;left:-10px;width:120px;transform:rotate(3deg);background:rgba(240,180,100,0.55);"></div>
+        <div class="toc-title-block">
+          <div class="toc-tag">Reading Notes</div>
+          <h1 class="book-title">Clear<br>Thinking</h1>
+          <p class="book-author">— Shane Parrish —</p>
+        </div>
+        <div class="toc-deco-img" id="tocThumbWrap" style="display:none">
+          <img id="tocThumb" src="" alt="cover thumbnail">
+        </div>
+        <p class="toc-tagline">Turning ordinary moments<br>into extraordinary results ♡</p>
+        <div class="toc-date">
+          <label class="toc-date-label">Started</label>
+          <input type="date" class="date-picker" id="startDate">
+        </div>
+        <div class="washi washi-v" style="bottom:0;right:18px;height:120px;transform:rotate(2deg);background:rgba(150,200,220,0.45);"></div>
+      </div>
+
+      <div class="spine"></div>
+
+      <div class="page right toc-right">
+        <h2 class="toc-heading">Contents</h2>
+        <div class="part-list">
+          <div class="part-card" style="--accent:#e07b54;--rot:-1deg" onclick="flipTo('s2')">
+            <span class="part-num">Part 1</span>
+            <span class="part-name">The Enemies of<br>Clear Thinking</span>
+            <span class="part-arrow">→</span>
+          </div>
+          <div class="part-card" style="--accent:#7fb5c5;--rot:0.8deg" onclick="flipTo('s3')">
+            <span class="part-num">Part 2</span>
+            <span class="part-name">Building Strength</span>
+            <span class="part-arrow">→</span>
+          </div>
+          <div class="part-card" style="--accent:#b5c99a;--rot:-0.5deg" onclick="flipTo('s4')">
+            <span class="part-num">Part 3</span>
+            <span class="part-name">Managing Weaknesses</span>
+            <span class="part-arrow">→</span>
+          </div>
+          <div class="part-card" style="--accent:#d4a5a5;--rot:1deg" onclick="flipTo('s5')">
+            <span class="part-num">Part 4</span>
+            <span class="part-name">Decisions</span>
+            <span class="part-arrow">→</span>
+          </div>
+          <div class="part-card" style="--accent:#c9a7cb;--rot:-0.8deg" onclick="flipTo('s6')">
+            <span class="part-num">Part 5</span>
+            <span class="part-name">Wanting What Matters</span>
+            <span class="part-arrow">→</span>
+          </div>
+        </div>
+        <div class="nav-row">
+          <button class="nav-btn" onclick="flipTo('s0', true)">← Back</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SPREAD 2: PART 1 ═══ -->
+    <div class="spread" id="s2">
+      <div class="page left part-left" style="--part-color:#e07b54">
+        <div class="part-header">
+          <div class="part-label">Part 1</div>
+          <h2 class="part-title">The Enemies of<br>Clear Thinking</h2>
+        </div>
+        <div class="part-themes">
+          <div class="theme-tag">Emotion Defaults</div>
+          <div class="theme-tag">Ego Defaults</div>
+          <div class="theme-tag">Social Pressure</div>
+          <div class="theme-tag">Inertia</div>
+        </div>
+        <div class="part-summary">
+          <p>Our biggest obstacle isn't intelligence — it's the automatic defaults our brain uses to navigate the world. These defaults bypass careful thinking and lead us astray without us even realizing it.</p>
+        </div>
+        <div class="key-quote">
+          <span class="quote-mark">"</span>
+          Your defaults run much of your life — and most people don't even know they have them.
+          <span class="quote-mark">"</span>
+        </div>
+        <div class="washi washi-h" style="bottom:40px;left:-10px;width:140px;transform:rotate(3deg);background:rgba(224,123,84,0.35);"></div>
+        <div class="nav-row">
+          <button class="nav-btn toc-btn" onclick="flipTo('s1')">≡ TOC</button>
+          <button class="nav-btn" onclick="flipTo('s3')">Next →</button>
+        </div>
+      </div>
+
+      <div class="spine"></div>
+
+      <div class="page right part-right" style="--part-color:#e07b54">
+        <h3 class="notes-heading">My Notes</h3>
+        <div class="notes-grid">
+          <div class="note-block">
+            <div class="note-label">💡 Key Insight</div>
+            <div class="note-area" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+          </div>
+          <div class="note-block">
+            <div class="note-label">⚡ Aha Moment</div>
+            <div class="note-area" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+          </div>
+        </div>
+        <div class="sticky-note" style="transform:rotate(-1.5deg)">
+          <div class="sticky-label">To Apply in My Life:</div>
+          <div class="note-area note-area-tall" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+        </div>
+        <div class="rating-row">
+          <span class="rating-label">Chapter Rating:</span>
+          <span class="stars">☆ ☆ ☆ ☆ ☆</span>
+        </div>
+        <div class="add-row">
+          <button class="add-page-btn" onclick="addNotesPage(this)">＋ add a page</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SPREAD 3: PART 2 ═══ -->
+    <div class="spread" id="s3">
+      <div class="page left part-left" style="--part-color:#7fb5c5">
+        <div class="part-header">
+          <div class="part-label">Part 2</div>
+          <h2 class="part-title">Building<br>Strength</h2>
+        </div>
+        <div class="part-themes">
+          <div class="theme-tag">Self-Accountability</div>
+          <div class="theme-tag">Self-Knowledge</div>
+          <div class="theme-tag">Self-Control</div>
+        </div>
+        <div class="part-summary">
+          <p>True strength isn't about willpower — it's about building systems and habits that make right thinking the path of least resistance. Know yourself, own your choices.</p>
+        </div>
+        <div class="key-quote">
+          <span class="quote-mark">"</span>
+          Position yourself so that good behavior is the default, not the exception.
+          <span class="quote-mark">"</span>
+        </div>
+        <div class="washi washi-h" style="bottom:40px;left:-10px;width:140px;transform:rotate(-2deg);background:rgba(127,181,197,0.35);"></div>
+        <div class="nav-row">
+          <button class="nav-btn" onclick="flipTo('s2')">← Prev</button>
+          <button class="nav-btn toc-btn" onclick="flipTo('s1')">≡ TOC</button>
+          <button class="nav-btn" onclick="flipTo('s4')">Next →</button>
+        </div>
+      </div>
+
+      <div class="spine"></div>
+
+      <div class="page right part-right" style="--part-color:#7fb5c5">
+        <h3 class="notes-heading">My Notes</h3>
+        <div class="notes-grid">
+          <div class="note-block">
+            <div class="note-label">💡 Key Insight</div>
+            <div class="note-area" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+          </div>
+          <div class="note-block">
+            <div class="note-label">⚡ Aha Moment</div>
+            <div class="note-area" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+          </div>
+        </div>
+        <div class="sticky-note" style="transform:rotate(1deg)">
+          <div class="sticky-label">To Apply in My Life:</div>
+          <div class="note-area note-area-tall" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+        </div>
+        <div class="rating-row">
+          <span class="rating-label">Chapter Rating:</span>
+          <span class="stars">☆ ☆ ☆ ☆ ☆</span>
+        </div>
+        <div class="add-row">
+          <button class="add-page-btn" onclick="addNotesPage(this)">＋ add a page</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SPREAD 4: PART 3 ═══ -->
+    <div class="spread" id="s4">
+      <div class="page left part-left" style="--part-color:#7a9e6e">
+        <div class="part-header">
+          <div class="part-label">Part 3</div>
+          <h2 class="part-title">Managing<br>Weaknesses</h2>
+        </div>
+        <div class="part-themes">
+          <div class="theme-tag">Safeguards</div>
+          <div class="theme-tag">Environment Design</div>
+          <div class="theme-tag">Protect Thinking</div>
+        </div>
+        <div class="part-summary">
+          <p>You can't eliminate your weaknesses — but you can design your environment to neutralize them. Safeguards turn your best intentions into reliable outcomes.</p>
+        </div>
+        <div class="key-quote">
+          <span class="quote-mark">"</span>
+          Rules remove the need to make decisions in the moment — saving your willpower for what matters.
+          <span class="quote-mark">"</span>
+        </div>
+        <div class="washi washi-h" style="bottom:40px;left:-10px;width:140px;transform:rotate(1.5deg);background:rgba(122,158,110,0.35);"></div>
+        <div class="nav-row">
+          <button class="nav-btn" onclick="flipTo('s3')">← Prev</button>
+          <button class="nav-btn toc-btn" onclick="flipTo('s1')">≡ TOC</button>
+          <button class="nav-btn" onclick="flipTo('s5')">Next →</button>
+        </div>
+      </div>
+
+      <div class="spine"></div>
+
+      <div class="page right part-right" style="--part-color:#7a9e6e">
+        <h3 class="notes-heading">My Notes</h3>
+        <div class="notes-grid">
+          <div class="note-block">
+            <div class="note-label">💡 Key Insight</div>
+            <div class="note-area" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+          </div>
+          <div class="note-block">
+            <div class="note-label">⚡ Aha Moment</div>
+            <div class="note-area" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+          </div>
+        </div>
+        <div class="sticky-note" style="transform:rotate(-0.8deg)">
+          <div class="sticky-label">To Apply in My Life:</div>
+          <div class="note-area note-area-tall" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+        </div>
+        <div class="rating-row">
+          <span class="rating-label">Chapter Rating:</span>
+          <span class="stars">☆ ☆ ☆ ☆ ☆</span>
+        </div>
+        <div class="add-row">
+          <button class="add-page-btn" onclick="addNotesPage(this)">＋ add a page</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SPREAD 5: PART 4 ═══ -->
+    <div class="spread" id="s5">
+      <div class="page left part-left" style="--part-color:#c47a7a">
+        <div class="part-header">
+          <div class="part-label">Part 4</div>
+          <h2 class="part-title">Decisions</h2>
+        </div>
+        <div class="part-themes">
+          <div class="theme-tag">Define the Problem</div>
+          <div class="theme-tag">Explore Options</div>
+          <div class="theme-tag">Evaluate &amp; Choose</div>
+        </div>
+        <div class="part-summary">
+          <p>Better decisions come from a better process, not from trying harder. Define the problem, explore the space, evaluate with clear criteria, then commit fully.</p>
+        </div>
+        <div class="key-quote">
+          <span class="quote-mark">"</span>
+          The quality of your decisions determines the quality of your life.
+          <span class="quote-mark">"</span>
+        </div>
+        <div class="washi washi-h" style="bottom:40px;left:-10px;width:140px;transform:rotate(-3deg);background:rgba(196,122,122,0.35);"></div>
+        <div class="nav-row">
+          <button class="nav-btn" onclick="flipTo('s4')">← Prev</button>
+          <button class="nav-btn toc-btn" onclick="flipTo('s1')">≡ TOC</button>
+          <button class="nav-btn" onclick="flipTo('s6')">Next →</button>
+        </div>
+      </div>
+
+      <div class="spine"></div>
+
+      <div class="page right part-right" style="--part-color:#c47a7a">
+        <h3 class="notes-heading">My Notes</h3>
+        <div class="notes-grid">
+          <div class="note-block">
+            <div class="note-label">💡 Key Insight</div>
+            <div class="note-area" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+          </div>
+          <div class="note-block">
+            <div class="note-label">⚡ Aha Moment</div>
+            <div class="note-area" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+          </div>
+        </div>
+        <div class="sticky-note" style="transform:rotate(1.2deg)">
+          <div class="sticky-label">To Apply in My Life:</div>
+          <div class="note-area note-area-tall" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+        </div>
+        <div class="rating-row">
+          <span class="rating-label">Chapter Rating:</span>
+          <span class="stars">☆ ☆ ☆ ☆ ☆</span>
+        </div>
+        <div class="add-row">
+          <button class="add-page-btn" onclick="addNotesPage(this)">＋ add a page</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SPREAD 6: PART 5 ═══ -->
+    <div class="spread" id="s6">
+      <div class="page left part-left" style="--part-color:#9b7cb5">
+        <div class="part-header">
+          <div class="part-label">Part 5</div>
+          <h2 class="part-title">Wanting What<br>Matters</h2>
+        </div>
+        <div class="part-themes">
+          <div class="theme-tag">Define Success</div>
+          <div class="theme-tag">True Goals</div>
+          <div class="theme-tag">The Good Life</div>
+        </div>
+        <div class="part-summary">
+          <p>Clear thinking isn't just about avoiding mistakes — it's about directing your life toward what truly matters. Define what you want before the world defines it for you.</p>
+        </div>
+        <div class="key-quote">
+          <span class="quote-mark">"</span>
+          Most people spend their whole lives chasing things they don't actually want.
+          <span class="quote-mark">"</span>
+        </div>
+        <div class="washi washi-h" style="bottom:40px;left:-10px;width:140px;transform:rotate(2deg);background:rgba(155,124,181,0.35);"></div>
+        <div class="nav-row">
+          <button class="nav-btn" onclick="flipTo('s5')">← Prev</button>
+          <button class="nav-btn toc-btn" onclick="flipTo('s1')">≡ TOC</button>
+        </div>
+      </div>
+
+      <div class="spine"></div>
+
+      <div class="page right part-right" style="--part-color:#9b7cb5">
+        <h3 class="notes-heading">My Notes</h3>
+        <div class="notes-grid">
+          <div class="note-block">
+            <div class="note-label">💡 Key Insight</div>
+            <div class="note-area" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+          </div>
+          <div class="note-block">
+            <div class="note-label">⚡ Aha Moment</div>
+            <div class="note-area" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+          </div>
+        </div>
+        <div class="sticky-note" style="transform:rotate(-1deg)">
+          <div class="sticky-label">To Apply in My Life:</div>
+          <div class="note-area note-area-tall" contenteditable="true" spellcheck="false" data-ph="write here..."></div>
+        </div>
+        <div class="rating-row">
+          <span class="rating-label">Overall Book Rating:</span>
+          <span class="stars">☆ ☆ ☆ ☆ ☆</span>
+        </div>
+        <div class="add-row">
+          <button class="add-page-btn" onclick="addNotesPage(this)">＋ add a page</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /book-wrap -->
+
+  <script src="script.js"></script>
+</body>
+</html>

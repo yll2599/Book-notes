@@ -1,0 +1,9 @@
+# Personal photos — never commit cover images
+images/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
