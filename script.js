@@ -40,7 +40,6 @@ function flipTo(targetId, isBack = false) {
   const tocThumb    = document.getElementById('tocThumb');
   const tocWrap     = document.getElementById('tocThumbWrap');
 
-  // key is per-file so multiple books don't share the same cover
   const key = 'cover:' + location.pathname.split('/').pop();
 
   function applyImage(src) {
@@ -52,11 +51,31 @@ function flipTo(targetId, isBack = false) {
     openBelow.style.display   = 'block';
     tocThumb.src = src;
     tocWrap.style.display = 'block';
-    // clicking the frame (but not the change button) opens the book
     frame.style.cursor = 'pointer';
   }
 
-  // Restore saved image, or fall back to images/cover.png if present
+  // Compress image via canvas before saving — prevents localStorage quota errors
+  function compressAndSave(file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const MAX = 800;
+        const ratio = Math.min(MAX / img.width, MAX / img.height, 1);
+        const canvas = document.createElement('canvas');
+        canvas.width  = Math.round(img.width  * ratio);
+        canvas.height = Math.round(img.height * ratio);
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        const compressed = canvas.toDataURL('image/jpeg', 0.82);
+        localStorage.setItem(key, compressed);
+        applyImage(compressed);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // Load on start: localStorage first, then images/cover.png fallback
   const saved = localStorage.getItem(key);
   if (saved) {
     applyImage(saved);
@@ -66,36 +85,15 @@ function flipTo(targetId, isBack = false) {
     fallback.src = 'images/cover.png';
   }
 
-  // Placeholder click → open file picker
-  placeholder.addEventListener('click', e => {
-    e.stopPropagation();
-    fileInput.click();
-  });
-
-  // Change button click → open file picker
-  changBtn.addEventListener('click', e => {
-    e.stopPropagation();
-    fileInput.click();
-  });
-
-  // Frame click → open book always; placeholder click is handled separately
+  placeholder.addEventListener('click', e => { e.stopPropagation(); fileInput.click(); });
+  changBtn.addEventListener('click',     e => { e.stopPropagation(); fileInput.click(); });
   frame.addEventListener('click', () => flipTo('s1'));
 
-  // File selected
   fileInput.addEventListener('change', e => {
     const file = e.target.files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => {
-      try {
-        localStorage.setItem(key, ev.target.result);
-      } catch (_) {
-        // localStorage full (large image) — show without saving
-      }
-      applyImage(ev.target.result);
-    };
-    reader.readAsDataURL(file);
-    fileInput.value = ''; // allow re-selecting same file
+    fileInput.value = '';
+    compressAndSave(file);
   });
 })();
 

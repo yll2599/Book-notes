@@ -312,15 +312,14 @@
   <footer class="footer">reading notes · 2025</footer>
 
   <script>
-    // Load cover images — localStorage first, then data-cover-fallback if set
-    document.querySelectorAll('[data-cover-key]').forEach(card => {
+    function loadCardCover(card) {
       const img         = card.querySelector('.card-img');
       const placeholder = card.querySelector('.card-placeholder');
 
       function showImg(src) {
         img.src = src;
         img.style.display = 'block';
-        placeholder.style.display = 'none';
+        if (placeholder) placeholder.style.display = 'none';
       }
 
       const saved    = localStorage.getItem(card.dataset.coverKey);
@@ -331,8 +330,24 @@
       } else if (fallback) {
         const test = new Image();
         test.onload = () => showImg(fallback);
+        test.onerror = () => {};
         test.src = fallback;
       }
+    }
+
+    const cards = document.querySelectorAll('[data-cover-key]');
+    cards.forEach(loadCardCover);
+
+    // Auto-update when another tab saves a new cover
+    window.addEventListener('storage', e => {
+      cards.forEach(card => {
+        if (e.key === card.dataset.coverKey) loadCardCover(card);
+      });
+    });
+
+    // Auto-reload when user switches back to this tab
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) cards.forEach(loadCardCover);
     });
   </script>
 
