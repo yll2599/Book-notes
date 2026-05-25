@@ -3,9 +3,9 @@
 ## Quick Steps
 
 1. Copy `index.html` → rename to e.g. `atomic-habits.html`
-2. Drop the cover image into `images/`
-3. Update the content in the new file (see sections below)
-4. Open the file in browser — done
+2. Update the content in the new file (see sections below)
+3. Add a card to `home.html` (see Home Page Card section below)
+4. Open `home.html` in browser — your new book appears on the shelf
 
 ---
 
@@ -17,17 +17,18 @@
 ```
 
 ### 2. Cover image (s0)
-```html
-<img src="images/YOUR-COVER.png" alt="Book Title cover">
-```
+The cover is uploaded in the browser — no code change needed.
+On first open, click the 📷 placeholder to upload a photo. It will be compressed and saved automatically.
+
+Optionally drop a fallback image into `images/` (e.g. `images/atomic-habits.png`) — the book will show it until a photo is uploaded via the browser.
 
 ### 3. TOC left page (s1) — title, author, tagline
 ```html
 <h1 class="book-title">Book<br>Title</h1>
 <p class="book-author">— Author Name —</p>
 <p class="toc-tagline">Subtitle or tagline ♡</p>
-<img src="images/YOUR-COVER.png" alt="cover thumbnail">
 ```
+The TOC thumbnail updates automatically once a cover photo is uploaded.
 
 ### 4. Spine label
 ```css
@@ -120,6 +121,34 @@ Each book spread follows this pattern. Duplicate/remove spreads to match the boo
 
 ---
 
+## Home Page Card (home.html)
+
+Add a card to the shelf inside the `<div class="shelf">` block, before the `add-card`:
+
+```html
+<a class="book-card" href="atomic-habits.html"
+   style="--rot: 1deg"
+   data-cover-key="cover:atomic-habits.html"
+   data-cover-fallback="images/atomic-habits.png">
+  <div class="card-tape" style="background:rgba(127,181,197,0.5);--tape-rot:2deg"></div>
+  <div class="card-cover">
+    <img class="card-img" src="" alt="Atomic Habits">
+    <div class="card-placeholder"><span>📖</span><small>NO COVER</small></div>
+  </div>
+  <div class="card-info">
+    <div class="card-title">Atomic Habits</div>
+    <div class="card-author">James Clear</div>
+    <div class="card-open">open notes →</div>
+  </div>
+</a>
+```
+
+- `data-cover-key` must match `cover:YOUR-FILENAME.html` exactly
+- `data-cover-fallback` is optional — points to a local image shown before any upload
+- `--rot` rotates the card slightly; vary it per book for a natural shelf look
+
+---
+
 ## TOC Part Cards (s1 right page)
 
 Add one `.part-card` per part. Match `flipTo('sN')` to the spread IDs above.
@@ -174,6 +203,7 @@ Pick one per part — or choose your own hex:
 | Summary        | Click text to edit                 | localStorage  |
 | Quote          | Click text between " "             | localStorage  |
 | Note areas     | Click any lined area               | localStorage  |
+| Cover photo    | Click 📷 or ↻ change               | localStorage  |
 | Star rating    | Click stars                        | *(session)*   |
 | Started date   | Click date picker                  | localStorage  |
 

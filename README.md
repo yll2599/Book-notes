@@ -22,13 +22,14 @@ A hand-drawn, scrapbook-style reading notes app built with plain HTML, CSS, and 
 ## How to Use
 
 1. Clone or download the repo
-2. Open `index.html` in any browser (no server needed)
-3. Click the 📷 placeholder to upload your book cover
-4. Click through to the table of contents and start taking notes
+2. Open `home.html` in any browser (no server needed) — this is your book shelf
+3. Click a book card to open its notes
+4. On the cover page, click 📷 to upload a cover photo (auto-compressed before saving)
+5. Click through to the table of contents and start writing
 
 ## Add a New Book
 
-Copy `index.html`, rename it (e.g. `atomic-habits.html`), and follow the instructions in [`NEW-BOOK.md`](NEW-BOOK.md).
+Copy `index.html`, rename it (e.g. `atomic-habits.html`), and follow the instructions in [`NEW-BOOK.md`](NEW-BOOK.md). Then add a card to `home.html`.
 
 Each book file is independent — its notes and cover photo are saved separately in localStorage.
 
@@ -36,6 +37,7 @@ Each book file is independent — its notes and cover photo are saved separately
 
 ```
 book-notes/
+├── home.html        ← book shelf / entry point
 ├── index.html       ← Clear Thinking (template book)
 ├── style.css
 ├── script.js
