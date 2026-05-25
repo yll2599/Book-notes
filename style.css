@@ -292,6 +292,18 @@ body {
   gap: 18px;
 }
 
+.home-link {
+  font-family: 'Caveat', cursive;
+  font-size: 0.82rem;
+  color: var(--ink);
+  opacity: 0.4;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: opacity 0.15s;
+  align-self: flex-start;
+}
+.home-link:hover { opacity: 0.9; }
+
 .toc-title-block { margin-top: 18px; }
 
 .toc-tag {
